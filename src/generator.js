@@ -7,7 +7,7 @@ import {default as srcSprite} from "./source/sprite";
 import {default as program} from "commander";
 import {default as async} from "async";
 
-export default function () {
+export const generate = function () {
     program
         .version("0.0.1")
         .option("-c --csv <csv>", "CSV file path")
@@ -17,6 +17,7 @@ export default function () {
         .option("-s --sprite <sprite>", "Another sprite file")
         .parse(process.argv);
 
+    
     let fnList = ["sprite", "csv", "directory", "list"].filter(function (i) {
         return !!program[i];
     }).map(function (i) {
@@ -33,7 +34,7 @@ export default function () {
                 }));
         }
     });
-   
+ 
     // process them all
     async.map(fnList, function (fn, callback) {
         fn().then(function (objects) {
@@ -51,7 +52,8 @@ export default function () {
         }, []);
 
         if (program.output) {
-            writer.writeToFile(program.output, svgs); 
+            writer.writeToFile(program.output, svgs);
+            console.log('Combined', results.length, 'svgs to', program.output);
         } else {
             writer.writeToConsole(svgs);
         }
