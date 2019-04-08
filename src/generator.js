@@ -46,6 +46,9 @@ export const generate = function () {
         if (results.length == 0) {
             return;
         }
+
+        const svgCount = results.reduce((all, r) => {return all + r.length;}, 0);
+
         // reduces the results into one
         let svgs = results.reduce(function (prev, curr) {
             return prev.concat(curr);
@@ -53,7 +56,7 @@ export const generate = function () {
 
         if (program.output) {
             writer.writeToFile(program.output, svgs);
-            console.log('Combined', results.length, 'svgs to', program.output);
+            console.log('Combined', svgCount, 'svgs to', program.output);
         } else {
             writer.writeToConsole(svgs);
         }
