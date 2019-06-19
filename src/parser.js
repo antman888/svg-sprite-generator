@@ -11,7 +11,6 @@ import {default as fs} from "fs";
 
 const addSuffixToIds = (element, suffix) => {
     const tagName = element[0].name;
-    if (tagName === 'path') {return;}
     
     // depth-first traverse of svg element tree to make ids unique
     element.children().each(function () {
@@ -20,7 +19,8 @@ const addSuffixToIds = (element, suffix) => {
 
     // make ids unique
     let id = element.attr('id');
-    if (tagName === 'clipPath' && id != null) {
+
+    if ((tagName === 'clipPath' || tagName === 'g' || tagName === 'path') && id != null) {
         if (id !== suffix) {
             element.attr('id', id + "_" + suffix);
         }
