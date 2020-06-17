@@ -21,7 +21,7 @@ const addSuffixToIds = (element, suffix) => {
     let id = element.attr('id');
     if ((tagName === 'clipPath' || tagName === 'g' || tagName === 'path') && id != null) {
         // don't change elements with id="app" or id="my-app"
-        const appNameWithoutMyPrefix = id.substring(3);
+        const appNameWithoutMyPrefix = suffix.substring(3);
         if (id !== suffix && id !== appNameWithoutMyPrefix) {
             element.attr('id', id + "_" + suffix);
         }
