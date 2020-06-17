@@ -9,7 +9,7 @@ import {default as async} from "async";
 
 export const generate = function () {
     program
-        .version("0.0.2")
+        .version("0.0.3")
         .option("-c --csv <csv>", "CSV file path")
         .option("-d --directory <directory>", "SVG folder")
         .option("-l --list <list>", "List of files")
